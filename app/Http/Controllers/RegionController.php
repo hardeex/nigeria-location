@@ -31,7 +31,7 @@ class RegionController extends Controller
                 ->orWhere('geo_zone_full', 'LIKE', '%' . $request->geo_zone . '%');
         }
 
-        $states = Cache::remember('states:all:' . md5($request->fullUrl()), 3600, fn() => $query->get());
+        $states = Cache::remember('states:all:' . md5($request->fullUrl()), 3600, fn() => $query->get()->toArray());
 
         return $this->success(
             StateResource::collection($states),
@@ -154,10 +154,11 @@ class RegionController extends Controller
                         'zone' => $states->first()->geo_zone,
                         'zone_full' => $zone,
                         'state_count' => $states->count(),
-                        'states' => StateResource::collection($states),
+                        'states' => StateResource::collection($states)->resolve(),
                     ];
                 })
-                ->values();
+                ->values()
+                ->toArray();
         });
 
         return $this->success($zones, ['total_zones' => $zones->count()]);
