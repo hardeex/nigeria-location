@@ -34,8 +34,8 @@ class RegionController extends Controller
         $states = Cache::remember('states:all:' . md5($request->fullUrl()), 3600, fn() => $query->get()->toArray());
 
         return $this->success(
-            StateResource::collection($states),
-            ['total' => $states->count()]
+            StateResource::collection(collect($states)),
+            ['total' => count($states)]
         );
     }
 
@@ -161,7 +161,7 @@ class RegionController extends Controller
                 ->toArray();
         });
 
-        return $this->success($zones, ['total_zones' => $zones->count()]);
+        return $this->success($zones, ['total_zones' => count($zones)]);
     }
 
     /**
