@@ -39,6 +39,7 @@ php artisan serve
 
 ## Endpoints
 
+Base URL: https://nigeria-location.jamiuadewaleyusuf.com/
 All endpoints are prefixed with `/api/v1`.
 
 ---
