@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
-          command_timeout: 10m
+          command_timeout: 30m
           script: |
             set -e
 
@@ -27,11 +27,8 @@ jobs:
             git pull origin main
 
             echo "==> Rebuilding container..."
-            docker compose -f /home/adewale/docker/docker-compose.nigeria.yml \
+            DOCKER_BUILDKIT=1 docker compose -f /home/adewale/docker/docker-compose.nigeria.yml \
               up -d --build api-nigeria
-
-            echo "==> Installing dependencies..."
-            docker exec api-nigeria composer install --no-dev --optimize-autoloader
 
             echo "==> Fixing permissions..."
             docker exec api-nigeria chown -R www-data:www-data /var/www/html/storage

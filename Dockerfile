@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 # ── Nigeria Locations API — PHP 8.4-FPM ───────────────────────
 FROM php:8.4-fpm-alpine
 
@@ -9,8 +10,9 @@ RUN apk add --no-cache \
     icu-dev linux-headers \
     autoconf g++ make
 
-# ── PHP extensions ────────────────────────────────────────────
-RUN docker-php-ext-configure intl \
+# ── PHP extensions (cached across builds) ────────────────────
+RUN --mount=type=cache,target=/tmp/pear \
+    docker-php-ext-configure intl \
     && docker-php-ext-install \
         pdo pdo_mysql \
         mbstring zip \
@@ -18,7 +20,8 @@ RUN docker-php-ext-configure intl \
         xml intl
 
 # ── Redis extension ───────────────────────────────────────────
-RUN pecl install redis && docker-php-ext-enable redis
+RUN --mount=type=cache,target=/tmp/pear \
+    pecl install redis && docker-php-ext-enable redis
 
 # ── Composer ──────────────────────────────────────────────────
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -27,7 +30,8 @@ WORKDIR /var/www/html
 
 # ── Install PHP dependencies ──────────────────────────────────
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN --mount=type=cache,target=/root/.composer/cache \
+    composer install --no-dev --optimize-autoloader --no-scripts
 
 # ── Copy application ──────────────────────────────────────────
 COPY . .
