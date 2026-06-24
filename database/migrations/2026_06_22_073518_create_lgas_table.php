@@ -4,28 +4,30 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
         Schema::create('lgas', function (Blueprint $table) {
-            $table->id(); // Auto-incrementing ID
-            $table->string('name'); // Name of the LGA
-            $table->string('state_name'); // Name of the state to link to the LGA
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('state_name');
+            $table->string('state_slug')->nullable();
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lng', 10, 7)->nullable();
+            $table->string('postal_code', 10)->nullable();
+            $table->string('country_code', 5)->default('NG');
 
-            // Composite unique constraint to ensure unique 'state_name' and 'name' combinations
-            $table->unique(['state_name', 'name']);
+            $table->unique(['name', 'state_name']);
+            $table->index('state_name');
+            $table->index('state_slug');
+            $table->index('postal_code');
+            $table->index(['lat', 'lng']);
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('lgas');

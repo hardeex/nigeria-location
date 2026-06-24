@@ -1,0 +1,5 @@
+#!/bin/bash
+# Push to origin remote
+git push origin main
+
+git push adewale main

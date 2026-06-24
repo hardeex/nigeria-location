@@ -1,20 +1,34 @@
 <?php
 
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Lga;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class State extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'name',
+        'slug',
+        'capital',
+        'geo_zone',
+        'geo_zone_full',
+        'lat',
+        'lng',
+        'postal_prefix',
+        'country_code',
+        'iso_code',
+        'lga_count',
+    ];
 
-    protected $fillable = ['name'];
+    protected $casts = [
+        'lat' => 'float',
+        'lng' => 'float',
+        'lga_count' => 'integer',
+    ];
 
-    public function lgas()
+    public function lgas(): HasMany
     {
-        return $this->hasMany(Lga::class);
+        return $this->hasMany(Lga::class, 'state_name', 'name');
     }
 }
