@@ -37,10 +37,11 @@ php artisan serve
 
 ---
 
-## Endpoints
 
-Base URL: https://nigeria.jamiuadewaleyusuf.com/
-All endpoints are prefixed with `/api/v1`.
+### Base URL
+
+```text
+https://nigeria.jamiuadewaleyusuf.com/api/v1
 
 ---
 
