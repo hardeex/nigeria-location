@@ -245,6 +245,8 @@ class RegionController extends Controller
      *   radius  (optional) km, default 100, max 500
      *   limit   (optional) default 10, max 50
      *   type    (optional) lga|state, default lga
+     * 8.9669
+     * 4.5877
      */
     public function nearby(Request $request): JsonResponse
     {
