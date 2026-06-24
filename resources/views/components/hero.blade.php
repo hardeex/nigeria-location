@@ -26,7 +26,7 @@
                 <div class="terminal-dot" style="background:#FF5F57;"></div>
                 <div class="terminal-dot" style="background:#FEBC2E;"></div>
                 <div class="terminal-dot" style="background:#28C840;"></div>
-                <div class="url-bar">GET nigeria-location.jamiuadewaleyusuf.com/api/v1/states/lagos/lgas</div>
+                <div class="url-bar">GET nigeria.jamiuadewaleyusuf.com/api/v1/states/lagos/lgas</div>
             </div>
             <div class="terminal-body">
                 <div class="terminal-tabs">
