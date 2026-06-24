@@ -31,7 +31,7 @@ class RegionController extends Controller
                 ->orWhere('geo_zone_full', 'LIKE', '%' . $request->geo_zone . '%');
         }
 
-        $states = Cache::remember('states:all:' . md5($request->fullUrl()), 3600, fn() => $query->get());
+        $states = $query->get();
 
         return $this->success(
             StateResource::collection($states),
@@ -145,23 +145,20 @@ class RegionController extends Controller
      */
     public function geoZones(): JsonResponse
     {
-        $zones = Cache::remember('geo_zones', 3600, function () {
-            return State::orderBy('geo_zone_full')->orderBy('name')
-                ->get()
-                ->groupBy('geo_zone_full')
-                ->map(function ($states, $zone) {
-                    return [
-                        'zone' => $states->first()->geo_zone,
-                        'zone_full' => $zone,
-                        'state_count' => $states->count(),
-                        'states' => StateResource::collection($states)->resolve(),
-                    ];
-                })
-                ->values()
-                ->toArray();
-        });
+        $zones = State::orderBy('geo_zone_full')->orderBy('name')
+            ->get()
+            ->groupBy('geo_zone_full')
+            ->map(function ($states, $zone) {
+                return [
+                    'zone' => $states->first()->geo_zone,
+                    'zone_full' => $zone,
+                    'state_count' => $states->count(),
+                    'states' => StateResource::collection($states),
+                ];
+            })
+            ->values();
 
-        return $this->success($zones, ['total_zones' => count($zones)]);
+        return $this->success($zones, ['total_zones' => $zones->count()]);
     }
 
     /**
