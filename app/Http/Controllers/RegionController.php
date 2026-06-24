@@ -31,11 +31,11 @@ class RegionController extends Controller
                 ->orWhere('geo_zone_full', 'LIKE', '%' . $request->geo_zone . '%');
         }
 
-        $states = Cache::remember('states:all:' . md5($request->fullUrl()), 3600, fn() => $query->get()->toArray());
+        $states = Cache::remember('states:all:' . md5($request->fullUrl()), 3600, fn() => $query->get());
 
         return $this->success(
-            StateResource::collection(collect($states)),
-            ['total' => count($states)]
+            StateResource::collection($states),
+            ['total' => $states->count()]
         );
     }
 
