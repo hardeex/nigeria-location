@@ -1,0 +1,52 @@
+name: Deploy Nigeria Locations API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Zero-Touch Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          command_timeout: 10m
+          script: |
+            set -e
+
+            echo "==> Pulling latest code..."
+            cd /home/adewale/apps/nigeria-api
+            git pull origin main
+
+            echo "==> Rebuilding container..."
+            docker compose -f /home/adewale/docker/docker-compose.nigeria.yml \
+              up -d --build api-nigeria
+
+            echo "==> Installing dependencies..."
+            docker exec api-nigeria composer install --no-dev --optimize-autoloader
+
+            echo "==> Fixing permissions..."
+            docker exec api-nigeria chown -R www-data:www-data /var/www/html/storage
+            docker exec api-nigeria chmod -R 775 /var/www/html/storage
+
+            echo "==> Running migrations..."
+            docker exec api-nigeria php artisan migrate --force
+
+            echo "==> Caching..."
+            docker exec api-nigeria php artisan config:cache
+            docker exec api-nigeria php artisan route:cache
+            docker exec api-nigeria php artisan view:cache
+            docker exec api-nigeria php artisan event:cache
+
+            echo "==> Cleaning up old images..."
+            docker image prune -f
+
+            echo "==> Nigeria Locations API deployed successfully."

@@ -8,7 +8,7 @@
     <meta name="keywords" content="Nigeria API, Nigerian states, LGA API, postal codes Nigeria, Nigerian locations, geolocation Nigeria">
     <meta property="og:title" content="Nigeria Locations API">
     <meta property="og:description" content="Free Nigerian geo-data API: states, LGAs, coordinates, postal codes, proximity search.">
-    <meta property="og:url" content="https://nigeria-location.jamiuadewaleyusuf.com">
+    <meta property="og:url" content="https://nigeria.jamiuadewaleyusuf.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

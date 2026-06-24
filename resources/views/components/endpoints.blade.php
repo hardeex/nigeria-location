@@ -6,8 +6,8 @@
 
         <div class="base-url-banner">
             <span class="base-url-label">BASE URL</span>
-            <span class="base-url-value font-mono" id="baseUrl">https://nigeria-location.jamiuadewaleyusuf.com/api/v1</span>
-            <button class="copy-btn" onclick="copyText('https://nigeria-location.jamiuadewaleyusuf.com/api/v1', this)" style="position:static;">Copy</button>
+            <span class="base-url-value font-mono" id="baseUrl">https://nigeria.jamiuadewaleyusuf.com/api/v1</span>
+            <button class="copy-btn" onclick="copyText('https://nigeria.jamiuadewaleyusuf.com/api/v1', this)" style="position:static;">Copy</button>
         </div>
 
         <div class="endpoint-grid">

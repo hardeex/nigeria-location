@@ -16,7 +16,7 @@
         <div id="int-js" class="int-panel active">
             <div class="code-block" style="position:relative;">
                 <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
-<pre style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;line-height:1.8;color:var(--cream);">const BASE = <span style="color:#A8FF3E">'https://nigeria-location.jamiuadewaleyusuf.com/api/v1'</span>;
+<pre style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;line-height:1.8;color:var(--cream);">const BASE = <span style="color:#A8FF3E">'.jamiuadewaleyusuf.com/api/v1'</span>;
 
 <span style="color:#6B7280">// Get all states</span>
 const states = await fetch(`${BASE}/states`).then(r => r.json());
@@ -43,7 +43,7 @@ use Illuminate\Support\Facades\Http;
 
 <span style="color:#7DD3FC">class</span> <span style="color:#A8FF3E">NigeriaLocationService</span>
 {
-    private string $base = <span style="color:#A8FF3E">'https://nigeria-location.jamiuadewaleyusuf.com/api/v1'</span>;
+    private string $base = <span style="color:#A8FF3E">'https://nigeria.jamiuadewaleyusuf.com/api/v1'</span>;
 
     <span style="color:#7DD3FC">public function</span> <span style="color:#A8FF3E">states</span>(string $geoZone = null): array
     {
@@ -75,7 +75,7 @@ use Illuminate\Support\Facades\Http;
                 <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
 <pre style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;line-height:1.8;color:var(--cream);"><span style="color:#7DD3FC">import</span> requests
 
-BASE = <span style="color:#A8FF3E">"https://nigeria-location.jamiuadewaleyusuf.com/api/v1"</span>
+BASE = <span style="color:#A8FF3E">".jamiuadewaleyusuf.com/api/v1"</span>
 
 <span style="color:#6B7280"># All states in South West</span>
 states = requests.get(f<span style="color:#A8FF3E">"{BASE}/states"</span>, params={<span style="color:#A8FF3E">"geo_zone"</span>: <span style="color:#A8FF3E">"SW"</span>}).json()[<span style="color:#A8FF3E">"data"</span>]
@@ -99,7 +99,7 @@ location = requests.get(f<span style="color:#A8FF3E">"{BASE}/postal-codes/lookup
 <pre style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;line-height:1.8;color:var(--cream);"><span style="color:#7DD3FC">import</span> <span style="color:#A8FF3E">'dart:convert'</span>;
 <span style="color:#7DD3FC">import</span> <span style="color:#A8FF3E">'package:http/http.dart'</span> as http;
 
-const _base = <span style="color:#A8FF3E">'https://nigeria-location.jamiuadewaleyusuf.com/api/v1'</span>;
+const _base = <span style="color:#A8FF3E">'https://nigeria.jamiuadewaleyusuf.com/api/v1'</span>;
 
 <span style="color:#6B7280">// Get states</span>
 Future&lt;List&gt; getStates() async {
@@ -129,7 +129,7 @@ Future&lt;List&gt; getNearby(double lat, double lng, {int radius=100}) async {
                 <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
 <pre style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;line-height:1.8;color:var(--cream);"><span style="color:#7DD3FC">import</span> { useState, useEffect } <span style="color:#7DD3FC">from</span> <span style="color:#A8FF3E">'react'</span>;
 
-const BASE = <span style="color:#A8FF3E">'https://nigeria-location.jamiuadewaleyusuf.com/api/v1'</span>;
+const BASE = <span style="color:#A8FF3E">'https://nigeria.jamiuadewaleyusuf.com/api/v1'</span>;
 
 <span style="color:#6B7280">// State → LGA cascade hook</span>
 <span style="color:#7DD3FC">export function</span> useNigeriaLocation() {
@@ -159,22 +159,22 @@ const BASE = <span style="color:#A8FF3E">'https://nigeria-location.jamiuadewaley
             <div class="code-block" style="position:relative;">
                 <button class="copy-btn" onclick="copyBlock(this)">Copy</button>
 <pre style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;line-height:1.8;color:var(--cream);"><span style="color:#6B7280"># All states</span>
-curl https://nigeria-location.jamiuadewaleyusuf.com/api/v1/states
+curl https://nigeria.jamiuadewaleyusuf.com/api/v1/states
 
 <span style="color:#6B7280"># States by geopolitical zone</span>
-curl "https://nigeria-location.jamiuadewaleyusuf.com/api/v1/states?geo_zone=SW"
+curl "https://nigeria.jamiuadewaleyusuf.com/api/v1/states?geo_zone=SW"
 
 <span style="color:#6B7280"># LGAs for a state</span>
-curl https://nigeria-location.jamiuadewaleyusuf.com/api/v1/states/lagos/lgas
+curl https://nigeria.jamiuadewaleyusuf.com/api/v1/states/lagos/lgas
 
 <span style="color:#6B7280"># Nearby (Abuja coords)</span>
-curl "https://nigeria-location.jamiuadewaleyusuf.com/api/v1/nearby?lat=9.0765&lng=7.3986&radius=50"
+curl "https://nigeria.jamiuadewaleyusuf.com/api/v1/nearby?lat=9.0765&lng=7.3986&radius=50"
 
 <span style="color:#6B7280"># Postal code lookup</span>
-curl "https://nigeria-location.jamiuadewaleyusuf.com/api/v1/postal-codes/lookup?code=900001"
+curl "https://nigeria.jamiuadewaleyusuf.com/api/v1/postal-codes/lookup?code=900001"
 
 <span style="color:#6B7280"># Search LGAs</span>
-curl "https://nigeria-location.jamiuadewaleyusuf.com/api/v1/lgas/search?q=aba"</pre>
+curl "https://nigeria.jamiuadewaleyusuf.com/api/v1/lgas/search?q=aba"</pre>
             </div>
         </div>
 
