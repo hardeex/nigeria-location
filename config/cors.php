@@ -1,24 +1,21 @@
 <?php
 
 return [
-
     'paths' => ['api/*'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['GET', 'OPTIONS'],
 
-    'allowed_origins' => [
-        'https://uselodger.com',
-        'http://localhost:3000',
-        'http://localhost:5173',
-        'http://localhost:8000',
+    // Use wildcard since it's a public API
+    'allowed_origins' => ['*'],
 
-    ],
+    'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['Content-Type', 'Accept', 'Authorization'],
 
     'exposed_headers' => [],
 
-    'max_age' => 0,
+    'max_age' => 86400,
 
-    'supports_credentials' => true,
+    // IMPORTANT: must be false when using wildcard origin
+    'supports_credentials' => false,
 ];
